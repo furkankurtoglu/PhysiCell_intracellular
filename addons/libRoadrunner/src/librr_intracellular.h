@@ -42,7 +42,8 @@ class RoadRunnerIntracellular : public PhysiCell::Intracellular
 	std::map<std::string, double> parameters;
 	std::map<std::string, std::string> substrate_species;
 	std::map<std::string, std::string> custom_data_species;
-	std::map<std::string, int> species_result_column_index;
+	std::map<std::string, std::string> phenotype_species;    ///////
+	std::map<std::string, int> species_result_column_index;   
 	
     // rrc::RRHandle rrHandle = createRRInstance();
     rrc::RRHandle rrHandle;
@@ -65,6 +66,7 @@ class RoadRunnerIntracellular : public PhysiCell::Intracellular
 		RoadRunnerIntracellular* clone = new RoadRunnerIntracellular(this);
 		clone->sbml_filename = this->sbml_filename;
 		clone->substrate_species = this->substrate_species;
+        clone->phenotype_species = this->phenotype_species; //////////////////
 		clone->custom_data_species = this->custom_data_species;
 		return static_cast<Intracellular*>(clone);
 	}
@@ -87,7 +89,7 @@ class RoadRunnerIntracellular : public PhysiCell::Intracellular
 	
 	double get_parameter_value(std::string name);
 	int set_parameter_value(std::string name, double value);
-	
+	int update_Phenotype();
 	std::string get_state();
 
     // for now, define dummy methods for these in the abstract parent class
@@ -95,7 +97,7 @@ class RoadRunnerIntracellular : public PhysiCell::Intracellular
 	bool get_boolean_node_value(std::string name) { return false; }
 	void set_boolean_node_value(std::string name, bool value)  {}
     void print_current_nodes() {}
-	
+	void SBML_phenotype_species(pugi::xml_node& node);
 	// static void save_PhysiBoSS(std::string path, std::string index);
 	static void save_libRR(std::string path, std::string index);
 

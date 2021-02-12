@@ -65,14 +65,18 @@ void RoadRunnerIntracellular::initialize_intracellular_from_pugixml(pugi::xml_no
 	while( node_species )
 	{
         // ---------  substrate
+        
 		std::string substrate_name = node_species.attribute( "substrate" ).value(); 
 		if( substrate_name != "" )
 		{
+            
 			std::string species_name = PhysiCell::xml_get_my_string_value( node_species );
+            std::cout << "  ------- TEEEEEEEEEEST:"  << std::endl;
 			substrate_species[substrate_name] = species_name;
+            std::cout << "  ------- TEEEEEEEEEEST:"  << std::endl;
             // std::cout << "\n------------- "  << __FUNCTION__ << ": species_name= " << species_name << std::endl;
 		}
-
+        std::cout << "  ------- TEEEEEEEEEEST:"  << std::endl;
         // ---------  custom_data
 		std::string custom_data_name = node_species.attribute( "custom_data" ).value(); 
 		if( custom_data_name != "" )
@@ -81,7 +85,19 @@ void RoadRunnerIntracellular::initialize_intracellular_from_pugixml(pugi::xml_no
 			custom_data_species[custom_data_name] = species_name;
             // std::cout << "\n------------- "  << __FUNCTION__ << ": species_name= " << species_name << std::endl;
 		}
-
+        
+        std::string phenotype_name = node_species.attribute( "phenotype" ).value(); 
+        
+		if( phenotype_name != "" )
+		{
+            
+			std::string species_name = PhysiCell::xml_get_my_string_value( node_species );
+			substrate_species[phenotype_name] = species_name;
+            // std::cout << "\n------------- "  << __FUNCTION__ << ": species_name= " << species_name << std::endl;
+		}
+        // ---------  custom_data
+        
+        
 		node_species = node_species.next_sibling( "species" ); 
 	}
 	
@@ -309,3 +325,113 @@ std::string RoadRunnerIntracellular::get_state()
 {
     return sbml_filename;
 }
+
+/* void RoadRunnerIntracellular::SBML_phenotype_species(pugi::xml_node& node)
+{
+	pugi::xml_node node_phenotype_species = node.child( "phenotype_species" );
+	
+	while( node_phenotype_species )
+	{
+        // ---------  phenotype_species
+		std::string phentype_token = node_phenotype_species.attribute( "phenotype_token" ).value(); 
+		if( phentype_token != "" )
+		{
+            std::string species_name = PhysiCell::xml_get_my_string_value( node_species );
+            phenotype_species[phentype_token] = species_name;
+            // std::cout << "\n------------- "  << __FUNCTION__ << ": species_name= " << species_name << std::endl;
+		}
+
+		node_phenotype_species = node_phenotype_species.next_sibling( "phenotype_species" ); 
+	}
+    
+    
+	
+    std::cout << "  ------- substrate_species map:"  << std::endl;
+    for(auto elm : substrate_species)
+    {
+        std::cout << "      "  << elm.first << " -> " << elm.second << std::endl;
+    }
+    std::cout << "  ------- custom_data_species map:"  << std::endl;
+    for(auto elm : custom_data_species)
+    {
+        std::cout << "      "  << elm.first << " -> " << elm.second << std::endl;
+    }
+    std::cout << std::endl;
+ 
+
+	// maboss.set_initial_values(initial_values);
+	// maboss.set_parameters(parameters);	
+	// pugi::xml_node node_timestep = node.child( "time_step" ); 
+	// if( node_timestep )
+	// { 
+	// 	time_step = PhysiCell::xml_get_my_double_value( node_timestep );
+	// 	maboss.set_update_time_step(time_step);
+	// }
+} */
+
+/* int RoadRunnerIntracellular::update_Phenotype()
+{
+    list_phenotype_species
+    
+    while (
+    if (phenotype_name == "mms")
+    {
+        phenotype.motility.migration_speed=
+    }       
+    
+    if (phenotype_name == "mpt")
+    {
+        phenotype.motility.persistence_time=
+    }       
+
+    if (phenotype_name == "mmb")
+    {
+        phenotype.motility.migration_bias=
+    }
+    
+    if (phenotype_name == "da")
+    {
+        static int apoptosis_index = phenotype.death.find_death_model_index( PhysiCell_constants::apoptosis_death_model );
+        phenotype.death.rates[apoptosis_index]=
+    }    
+    
+    if (phenotype_name == "dn")
+    {
+        static int necrosis_model_index = phenotype.death.find_death_model_index( "Necrosis" );
+        phenotype.death.rates[necrosis_model_index]=
+    }  
+
+    if (phenotype_name == "ctr") // first three letters
+    {
+        static int necrosis_model_index = phenotype.death.find_death_model_index( "Necrosis" );
+        phenotype.cycle.data.transition_rate( )=
+    }  
+
+    if (phenotype_name == "sur") // first three letters
+    {
+        static int necrosis_model_index = phenotype.death.find_death_model_index( "Necrosis" );
+        phenotype.cycle.data.transition_rate( )=
+    }  
+    
+    if (phenotype_name == "sr12")// first three letters
+    {
+        static int necrosis_model_index = phenotype.death.find_death_model_index( "Necrosis" );
+        phenotype.cycle.data.transition_rate( )=
+    }  
+    
+    if (phenotype_name == "ssd")// first three letters
+    {
+        static int necrosis_model_index = phenotype.death.find_death_model_index( "Necrosis" );
+        phenotype.cycle.data.transition_rate( )=
+    }  
+
+
+    if (phenotype_name == "ser")// first three letters
+    {
+        static int necrosis_model_index = phenotype.death.find_death_model_index( "Necrosis" );
+        phenotype.cycle.data.transition_rate( )=
+    }  
+
+
+    return 0;
+} */
