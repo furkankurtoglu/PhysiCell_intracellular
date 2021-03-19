@@ -215,7 +215,7 @@ data-cleanup:
 	rm -f *.mat
 	rm -f *.xml
 	rm -f *.svg
-	rm -rf ./output
+	rm -rf ./output/*
 	mkdir ./output
 	touch ./output/empty.txt
 
@@ -253,3 +253,6 @@ unzip:
 untar: 
 	cp ./archives/latest.tar .
 	tar -xzf latest.tar
+
+animation:
+	cd output;magick mogrify -format jpg snapshot*.svg;magick snapshot*.jpg animation.gif

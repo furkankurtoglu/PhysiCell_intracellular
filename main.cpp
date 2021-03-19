@@ -111,42 +111,19 @@ void update_intracellular()
 
             // Obtain substrate value(s) for this voxel and update the corresponding species in SBML
             double oxy_val = microenvironment(vi)[oxygen_i];
-            double migration_speed = 0;
             std::cout << "main.cpp:  oxy_val (from substrate)= " << oxy_val << std::endl; 
             retval = (*all_cells)[i]->phenotype.intracellular->set_parameter_value("Oxy",oxy_val);
 
             (*all_cells)[i]->phenotype.intracellular->update();  // run solver
-            migration_speed = (*all_cells)[i]->phenotype.intracellular->get_parameter_value("transition_rate_0_1");
-            std::cout << "MIGRATION SPEED" << std::endl;
-            std::cout << migration_speed << std::endl;
+
             oxy_val = (*all_cells)[i]->phenotype.intracellular->get_parameter_value("Oxy");
             std::cout << "main.cpp:  oxy_val (from intracellular) = " << oxy_val << std::endl; 
             microenvironment(vi)[oxygen_i] = oxy_val;
-            
-            
           }
         }
     }
     // std::exit(-1);
 }
-
-/* void update_phenotype_parameters()
-void update_phenotype_parameters( Cell* pCell, Phenotype& phenotype, double dt )
-{
-    for( int i=0; i < (*all_cells).size(); i++ )
-    {
-       if( (*all_cells)[i]->is_out_of_domain == false  )
-        {
-          std::cout << "main.cpp:    update_intracellular():  ID = " << (*all_cells)[i]->ID << std::endl;
-        //   if( (*all_cells)[i]->phenotype.intracellular->enabled == false  )
-          if( (*all_cells)[i]->phenotype.intracellular == NULL  )
-          {
-            phenotype.motility.migration_speed
-          }
-        }
-    }
-    
-} */
 
 int main( int argc, char* argv[] )
 {
@@ -162,7 +139,6 @@ int main( int argc, char* argv[] )
 	
 	// OpenMP setup
 	omp_set_num_threads(PhysiCell_settings.omp_num_threads);
-    std::cout << "Test" << std::endl;
 	
 	// PNRG setup 
 	// SeedRandom();   // done in create_cell_types()

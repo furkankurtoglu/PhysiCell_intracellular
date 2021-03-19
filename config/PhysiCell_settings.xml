@@ -190,10 +190,8 @@
 					</options>
 				</motility>
 				<intracellular type="roadrunner">
-					<sbml_filename>./config/Toy_oxy_mms_tr_01.xml</sbml_filename>
+					<sbml_filename>./config/Toy_oxy.xml</sbml_filename>
                     <species substrate="oxygen">Oxy</species>
-                    <species phenotype="mms">migration_speed</species>
-                    <species phenotype="ctr12">transition_rate_0_1</species>
 				</intracellular>
 			</phenotype>
 		</cell_definition>
